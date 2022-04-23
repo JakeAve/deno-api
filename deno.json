@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "start": "deno run --allow-net --allow-read=.env,.env.defaults,.env.example --allow-env server.ts",
+    "dev": "denon run --allow-net --allow-read=.env,.env.defaults,.env.example --allow-env server.ts"
+  },
+  "fmt": {
+    "options": {
+      "singleQuote": true
+    }
+  }
+}
