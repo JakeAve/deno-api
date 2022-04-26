@@ -1,8 +1,8 @@
-import { ObjectId } from "../deps.ts";
-import { usersCollection } from "../mongo.ts";
+import { ObjectId } from '../deps.ts';
+import { usersCollection } from '../mongo.ts';
 
 export enum UserErrorCodes {
-  CREATE_USER_DUPLICATE_EMAIL = "User 1",
+  CREATE_USER_DUPLICATE_EMAIL = 'User 1',
 }
 
 interface UserConstructorParams {
@@ -10,6 +10,16 @@ interface UserConstructorParams {
   email: string;
   name: string;
   password: string;
+}
+
+interface ToObjectOptions {
+  includeId?: boolean;
+}
+
+interface UserToObject {
+  id?: string;
+  email: string;
+  name: string;
 }
 
 export class User {
@@ -26,17 +36,17 @@ export class User {
   }
 
   /**
-   *
    * @description Creates a new user in the database, hashes the password and throws an error if the email is already registered
    * @returns Promise<void>
    * @throws UserErrorCodes.CREATE_USER_DUPLICATE_EMAIL
    */
   async create() {
     const userAlreadyExists = await User.findOne({ email: this.email });
-    if (userAlreadyExists)
+    if (userAlreadyExists) {
       throw new Error(
-        `${UserErrorCodes.CREATE_USER_DUPLICATE_EMAIL} Email already exists`
+        `${UserErrorCodes.CREATE_USER_DUPLICATE_EMAIL} Email already exists`,
       );
+    }
     const { email, name, password } = this;
     const id: ObjectId = await usersCollection.insertOne({
       email,
@@ -53,11 +63,18 @@ export class User {
     return new User(user as unknown as UserConstructorParams);
   }
 
-  toObject() {
-    return {
-      id: this.id?.toString(),
+  /**
+   * @description Converts the user to a plain object
+   * @param {ToObjectOptions} options
+   * @returns UserToObject
+   */
+  toObject(options: ToObjectOptions = {}) {
+    const { includeId = false } = options;
+    const obj: UserToObject = {
       name: this.name,
       email: this.email,
     };
+    if (includeId) obj.id = this.id?.toString();
+    return obj;
   }
 }
