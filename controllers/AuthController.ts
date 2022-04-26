@@ -2,8 +2,8 @@ import { bcrypt, RouterContext } from '../deps.ts';
 import { User, UserErrorCodes } from '../models/User.ts';
 import {
   ApiErrorCodes,
-  internalServerError,
   sendApiError,
+  sendInternalServerError,
 } from '../utils/sendApiError.ts';
 import { createJWT } from '../utils/jwt.ts';
 
@@ -43,7 +43,7 @@ export class AuthController {
         token,
       };
     } catch (err) {
-      internalServerError(ctx, err);
+      sendInternalServerError(ctx, err);
     }
   }
   async register(ctx: RouterContext<any, any, any>) {
@@ -68,7 +68,7 @@ export class AuthController {
           code: ApiErrorCodes.DUPLICATE_EMAIL_REGISTER,
         });
       }
-      internalServerError(ctx, err);
+      sendInternalServerError(ctx, err);
     }
   }
 }

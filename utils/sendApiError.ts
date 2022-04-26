@@ -21,7 +21,7 @@ export const sendApiError = (
   ctx.response.body = message;
 };
 
-export const internalServerError = (
+export const sendInternalServerError = (
   ctx: RouterContext<any, any, any>,
   error: Error,
 ) => {
