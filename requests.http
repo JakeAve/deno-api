@@ -22,3 +22,41 @@ Content-Type: application/json
     "email": "test4@test.com",
     "password": "12345678"
 }
+
+@token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdDRAdGVzdC5jb20iLCJleHAiOjE2NTI0MDc0MDU5MTIsImlzcyI6InN1cnZleS1hcHAifQ.H6cxvTIYArnmGb_O0-Ilsr942QNOans89s2savIINdhOkw9xsv73GGGzQofQdPJOUy3lpsbH7tE1FtUXtZcxzg
+
+###
+
+GET http://localhost:8000/api/surveys
+Authorization: Bearer {{token}}
+###
+
+GET http://localhost:8000/api/surveys/627d99fdf886fd167febcdd1
+Authorization: Bearer {{token}}
+
+###
+
+POST http://localhost:8000/api/surveys
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Survey 7",
+    "description": "This is a survey"
+}
+
+###
+
+PUT http://localhost:8000/api/surveys/627d99fdf886fd167febcdd1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Survey 11",
+    "description": "This is a survey"
+}
+
+### 
+
+DELETE http://localhost:8000/api/surveys/627d9a3af886fd167febcdd2
+Authorization: Bearer {{token}}

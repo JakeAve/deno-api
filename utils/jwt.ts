@@ -1,24 +1,24 @@
-import { djwt } from '../deps.ts';
-import { Env } from '../.env.ts';
+import { djwt } from "../deps.ts";
+import { Env } from "../.env.ts";
 
 const JWT_SECRET = Deno.env.get(Env.JWT_SECRET)!;
 const key = await crypto.subtle.importKey(
-  'jwk',
+  "jwk",
   JSON.parse(JWT_SECRET),
-  { name: 'HMAC', hash: 'SHA-512' },
+  { name: "HMAC", hash: "SHA-512" },
   true,
-  ['sign', 'verify'],
+  ["sign", "verify"]
 );
-const ISS = 'survey-app';
+const ISS = "survey-app";
 
 const { create, verify, decode } = djwt;
 
 export const createJWT = (payload: object) => {
   const exp = new Date().getTime() + 60 * 60 * 1000;
   return create(
-    { alg: 'HS512', typ: 'JWT' },
+    { alg: "HS512", typ: "JWT" },
     { ...payload, exp, iss: ISS },
-    key,
+    key
   );
 };
 
