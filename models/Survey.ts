@@ -1,5 +1,5 @@
-import { ObjectId } from "../deps.ts";
-import { surveysCollection } from "../mongo.ts";
+import { ObjectId } from '../deps.ts';
+import { surveysCollection } from '../mongo.ts';
 
 interface SurveyConstructorParams {
   _id?: ObjectId;
@@ -15,7 +15,7 @@ export class Survey {
   public description: string;
   constructor({
     _id,
-    creatorId = "1",
+    creatorId = '1',
     title,
     description,
   }: SurveyConstructorParams) {
@@ -38,7 +38,7 @@ export class Survey {
 
   async delete() {
     const { id } = this;
-    if (!id) throw new Error("Survey has no id");
+    if (!id) throw new Error('Survey has no id');
     await surveysCollection.deleteOne({ _id: id });
   }
 
@@ -52,16 +52,16 @@ export class Survey {
   static async findByUser(creatorId: string) {
     const surveys = await surveysCollection.find({ creatorId });
     return surveys.map(
-      (survey) => new Survey(survey as SurveyConstructorParams)
+      (survey) => new Survey(survey as SurveyConstructorParams),
     );
   }
 
   async update({ title = this.title, description = this.title }) {
     const { id } = this;
-    if (!id) throw new Error("Survey has no id");
+    if (!id) throw new Error('Survey has no id');
     await surveysCollection.updateOne(
       { _id: id },
-      { $set: { title, description } }
+      { $set: { title, description } },
     );
     this.title = title;
     this.description = description;

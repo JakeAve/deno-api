@@ -1,10 +1,10 @@
-import { RouterContext } from "../deps.ts";
-import { Survey } from "../models/Survey.ts";
+import { RouterContext } from '../deps.ts';
+import { Survey } from '../models/Survey.ts';
 import {
   ApiErrorCodes,
   sendApiError,
   sendInternalServerError,
-} from "../utils/sendApiError.ts";
+} from '../utils/sendApiError.ts';
 
 export class SurveyController {
   async getAllForUser(ctx: RouterContext<any, any, any>) {
@@ -23,11 +23,12 @@ export class SurveyController {
       const id = ctx.params.id;
 
       const survey = await Survey.findById(id);
-      if (!survey)
+      if (!survey) {
         return sendApiError(ctx, 404, {
-          message: "Survey not found",
+          message: 'Survey not found',
           code: ApiErrorCodes.INVALID_SURVEY_ID,
         });
+      }
 
       ctx.response.status = 200;
       ctx.response.body = survey.toObject();
@@ -62,11 +63,12 @@ export class SurveyController {
       const { title, description } = payload;
 
       const survey = await Survey.findById(id);
-      if (!survey)
+      if (!survey) {
         return sendApiError(ctx, 404, {
-          message: "Survey not found",
+          message: 'Survey not found',
           code: ApiErrorCodes.INVALID_SURVEY_ID,
         });
+      }
 
       await survey.update({ title, description });
 
@@ -82,11 +84,12 @@ export class SurveyController {
       const id = ctx.params.id;
 
       const survey = await Survey.findById(id);
-      if (!survey)
+      if (!survey) {
         return sendApiError(ctx, 404, {
-          message: "Survey not found",
+          message: 'Survey not found',
           code: ApiErrorCodes.INVALID_SURVEY_ID,
         });
+      }
 
       await survey.delete();
 

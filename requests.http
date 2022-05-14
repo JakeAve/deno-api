@@ -52,7 +52,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "title": "Survey 11",
+    "title": "Survey 12",
     "description": "This is a survey"
 }
 
