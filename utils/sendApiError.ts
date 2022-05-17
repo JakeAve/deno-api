@@ -7,6 +7,7 @@ export enum ApiErrorCodes {
   INVALID_CREDENTIALS = '4',
   INVALID_JWT = '5',
   INVALID_SURVEY_ID = '6',
+  MODIFYING_SURVEY_WITH_WRONG_USER = '7',
 }
 
 interface ApiErrorMessage {

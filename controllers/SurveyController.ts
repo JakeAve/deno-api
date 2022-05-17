@@ -70,6 +70,13 @@ export class SurveyController {
         });
       }
 
+      if (survey.creatorId !== ctx.state.userId) {
+        return sendApiError(ctx, 401, {
+          message: 'Unauthorized',
+          code: ApiErrorCodes.MODIFYING_SURVEY_WITH_WRONG_USER,
+        });
+      }
+
       await survey.update({ title, description });
 
       ctx.response.status = 200;
@@ -88,6 +95,13 @@ export class SurveyController {
         return sendApiError(ctx, 404, {
           message: 'Survey not found',
           code: ApiErrorCodes.INVALID_SURVEY_ID,
+        });
+      }
+
+      if (survey.creatorId !== ctx.state.userId) {
+        return sendApiError(ctx, 401, {
+          message: 'Unauthorized',
+          code: ApiErrorCodes.MODIFYING_SURVEY_WITH_WRONG_USER,
         });
       }
 

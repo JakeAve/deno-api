@@ -19,11 +19,13 @@ POST http://localhost:8000/api/login
 Content-Type: application/json
 
 {
-    "email": "test4@test.com",
+    "email": "test3@test.com",
     "password": "12345678"
 }
 
-@token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdDRAdGVzdC5jb20iLCJleHAiOjE2NTI0MDc0MDU5MTIsImlzcyI6InN1cnZleS1hcHAifQ.H6cxvTIYArnmGb_O0-Ilsr942QNOans89s2savIINdhOkw9xsv73GGGzQofQdPJOUy3lpsbH7tE1FtUXtZcxzg
+###
+
+@token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdDNAdGVzdC5jb20iLCJleHAiOjE2NTI3NjAzODI2NTMsImlzcyI6InN1cnZleS1hcHAifQ.Xv8aAPPgsA0HU7oOjUCoKY-GID_ZNYQPoOcxg2FDKBv890M_p0yT95gbr-wG7hBEE42va7H2HJnEq0d2-ep59A
 
 ###
 
@@ -47,7 +49,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-PUT http://localhost:8000/api/surveys/627d99fdf886fd167febcdd1
+PUT http://localhost:8000/api/surveys/627db5d0898bf6302b2c201e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
