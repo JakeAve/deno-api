@@ -1,4 +1,4 @@
-## Deno Survey API
+# Deno Survey API
 
 Small API to learn about creating a deno project
 
@@ -12,3 +12,4 @@ Small API to learn about creating a deno project
 ```sh
 deno task dev
 ```
+
